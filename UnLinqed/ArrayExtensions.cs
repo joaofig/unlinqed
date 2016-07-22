@@ -55,6 +55,9 @@ namespace UnLinqed
 
         public static T[] SkipAndTake<T>(this T[] array, int skip, int take)
         {
+            if (skip + take > array.Length)
+                take = array.Length - skip;
+
             T[] temp = new T[take];
             Array.Copy(array, skip, temp, 0, take);
             return temp;

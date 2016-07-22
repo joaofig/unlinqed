@@ -41,6 +41,16 @@ namespace UnLinqed.Tests
         }
 
         [TestMethod]
+        public void SkipAndTake_Splices_OverflowEnd_Succeeds()
+        {
+            int[] test = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] end2 = test.SkipAndTake(8, 3);
+
+            Assert.AreEqual(test[8], end2[0]);
+            Assert.AreEqual(test[9], end2[1]);
+        }
+
+        [TestMethod]
         public void RemoveNulls_Removes_Start_Succeeds()
         {
             string[] array = new string[] { null, "1", "2" };
