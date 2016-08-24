@@ -82,5 +82,42 @@ namespace UnLinqed.Tests
             Assert.AreEqual(array[1], test[1]);
             Assert.AreEqual(test.Length, 2);
         }
+
+        [TestMethod]
+        public void RightTrimNulls_Removes_End_Succeeds()
+        {
+            string[] array = new string[] { "0", "1", null };
+            string[] test = array.RightTrimNulls();
+
+            Assert.AreEqual(array[0], test[0]);
+            Assert.AreEqual(array[1], test[1]);
+            Assert.AreEqual(test.Length, 2);
+        }
+
+        [TestMethod]
+        public void RightTrimNulls_Removes_Mid_Fails()
+        {
+            string[] array = new string[] { "0", "1", null, "3" };
+            string[] test = array.RightTrimNulls();
+
+            Assert.AreEqual(array[0], test[0]);
+            Assert.AreEqual(array[1], test[1]);
+            Assert.AreEqual(array[2], test[2]);
+            Assert.AreEqual(array[3], test[3]);
+            Assert.AreEqual(test.Length, 4);
+        }
+
+        [TestMethod]
+        public void RightTrimNulls_Removes_Interleaved_Succeeds()
+        {
+            string[] array = new string[] { "0", "1", null, "3", null };
+            string[] test = array.RightTrimNulls();
+
+            Assert.AreEqual(array[0], test[0]);
+            Assert.AreEqual(array[1], test[1]);
+            Assert.AreEqual(array[2], test[2]);
+            Assert.AreEqual(array[3], test[3]);
+            Assert.AreEqual(test.Length, 4);
+        }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnLinqed
 {
@@ -22,6 +18,15 @@ namespace UnLinqed
             }
             return temp.Left(c);
         }
+
+        public static T[] RightTrimNulls<T>(this T[] array) where T : class
+        {
+            int len = array.Length;
+            for(int i = len - 1; i >= 0 && array[i] == null; i-- )
+                len--;
+            return array.Left(len);
+        }
+
 
         public static T[] Left<T>(this T[] array, int length) where T : class
         {
