@@ -119,5 +119,23 @@ namespace UnLinqed.Tests
             Assert.AreEqual(array[3], test[3]);
             Assert.AreEqual(test.Length, 4);
         }
+
+        [TestMethod]
+        public void SortAscending_Correct()
+        {
+            int[] array = new int[] { 8, 5, 0, 7, 2 };
+            int[] test  = array.Sort( (a,b) => a.CompareTo(b) );
+
+            Assert.AreEqual(test[0], 0);
+        }
+
+        [TestMethod]
+        public void SortDescending_Correct()
+        {
+            int[] array = new int[] { 8, 5, 0, 7, 2 };
+            int[] test  = array.Sort( (a,b) => -a.CompareTo(b) );
+
+            Assert.AreEqual(test[0], 8);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace UnLinqed
 {
@@ -12,6 +13,21 @@ namespace UnLinqed
             for(int i = 0; i < temp.Length; i++)
             {
                 if(array[i] != null)
+                {
+                    temp[c++] = array[i];
+                }
+            }
+            return temp.Left(c);
+        }
+
+        public static T[] RemoveItem<T>(this T[] array, T item) where T : class
+        {
+            T[] temp = new T[array.Length];
+            int c = 0;
+
+            for(int i = 0; i < temp.Length; i++)
+            {
+                if(array[i] != item)
                 {
                     temp[c++] = array[i];
                 }
@@ -49,14 +65,14 @@ namespace UnLinqed
             return temp.Left(c);
         }
 
-        public static T[] Slice<T>(this T[] array, int start, int end)
-        {
-            if (start > end)
-                throw new ArgumentOutOfRangeException("The start index is larger than the end index. ");
-            T[] temp = new T[end - start];
-            Array.Copy(array, start, temp, 0, end - start);
-            return temp;
-        }
+        //public static T[] Slice<T>(this T[] array, int start, int end)
+        //{
+        //    if (start > end)
+        //        throw new ArgumentOutOfRangeException("The start index is larger than the end index. ");
+        //    T[] temp = new T[end - start];
+        //    Array.Copy(array, start, temp, 0, end - start);
+        //    return temp;
+        //}
 
         public static T[] SkipAndTake<T>(this T[] array, int skip, int take)
         {
@@ -68,5 +84,41 @@ namespace UnLinqed
             return temp;
         }
 
+        public static T[] Sort<T>(this T[] array, Comparison<T> comparison)
+        {
+            T[] sorted = new T[array.Length];
+
+            Array.Copy(array, sorted, array.Length);
+            Array.Sort<T>(sorted, comparison);
+            return sorted;
+        }
+
+        public static int IndexOf<T>(this T[] array, Func<T,bool> predicate)
+        {
+            int index = -1;
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(predicate(array[i]))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        public static int IndexOf<T>(this T[] array, T value)
+        {
+            int index = -1;
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(value.Equals(array[i]))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
     }
 }
