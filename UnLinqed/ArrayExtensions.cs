@@ -46,9 +46,10 @@ namespace UnLinqed
 
         public static T[] Left<T>(this T[] array, int length) where T : class
         {
-            T[] left = new T[length];
+            int size = Math.Min(length, array.Length);
+            T[] left = new T[size];
 
-            Array.Copy(array, left, length);
+            Array.Copy(array, left, size);
             return left;
         }
 
